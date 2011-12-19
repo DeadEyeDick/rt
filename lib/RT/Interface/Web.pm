@@ -1689,6 +1689,7 @@ sub MakeMIMEEntity {
     my $Message = MIME::Entity->build(
         Type    => 'multipart/mixed',
         "Message-Id" => RT::Interface::Email::GenMessageId,
+        "X-RT-Received-IP" => $ENV{'REMOTE_ADDR'},
         map { $_ => Encode::encode_utf8( $args{ $_} ) }
             grep defined $args{$_}, qw(Subject From Cc)
     );
