@@ -1211,7 +1211,37 @@ sub _Set {
     unless ( $self->CurrentUserHasRight('AdminQueue') ) {
         return ( 0, $self->loc('Permission Denied') );
     }
-    return ( $self->SUPER::_Set(@_) );
+
+    my %args = (
+        Field => undef,
+        Value => undef,
+        IsSQL => undef,
+        @_
+    );
+
+    if ( wantarray && $args{Field} && $args{Field} eq 'Lifecycle' ) {
+        my $old_val = $self->__Value($args{'Field'}) || 'default';
+
+        if ( $old_val eq 'default' && !defined $args{Value} ) {
+            return ( 0, $self->loc("That is already the current value") );
+        }
+
+        my ( $status, $msg ) = $self->SUPER::_Set(@_);
+
+        if ($status) {
+            my $new_val = $self->__Value($args{'Field'}) || 'default';
+            $msg = $self->loc(
+                "[_1] changed from [_2] to [_3]",
+                $self->loc( $args{'Field'} ),
+                qq{"$old_val"}, qq{"$new_val"},
+            );
+        }
+        return ( $status, $msg );
+    }
+    else {
+        return $self->SUPER::_Set(@_);
+    }
+
 }
 
 
