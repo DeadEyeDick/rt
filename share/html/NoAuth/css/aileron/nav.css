@@ -115,6 +115,7 @@
     left: auto;
     z-index: 9995;
     font-size: 0.9em;
+    height: 2.5em;
 }
 
 #page-navigation .sf-menu li, #page-navigation .sf-menu li li, #page-navigation .sf-menu li li li {
