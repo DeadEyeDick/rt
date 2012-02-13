@@ -92,20 +92,7 @@ $search->LoadById ($id);
 
 # If we are resetting prefs, do so before attempting to load them
 if ($ARGS{'Reset'}) {
-    my $pref = $class->new($session{'CurrentUser'});
-    my ($pref_ok) = $pref->LoadByNameAndObject(
-        Object => $session{'CurrentUser'}->UserObj,
-        Name   => 'Pref-'.$ARGS{'name'},
-    );
-
-    my ($ok, $msg);
-    if ($pref_ok) {
-        ($ok, $msg) = $pref->Delete;
-    }
-    else {
-        # The pref doesn't exist yet, but say it was reset anyway
-        $ok = 1;
-    }
+    my ($ok, $msg) = $session{'CurrentUser'}->UserObj->DeletePreferences($ARGS{name});
     push @actions, $ok ? loc('Preferences saved.') : $msg;
 }
 
