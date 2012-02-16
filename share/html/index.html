@@ -111,7 +111,8 @@ if ( $ARGS{'QuickCreate'} ) {
                         Requestors => $ARGS{'Requestors'},
                         From => $session{'CurrentUser'}->EmailAddress,
                         Content => $ARGS{'Content'},
-                        Subject => $ARGS{'Subject'});
+                        Subject => $ARGS{'Subject'},
+                        Interface => 'Web');
         push @results, $msg;
 
         if ( $t && $t->Id && RT->Config->Get('DisplayTicketAfterQuickCreate', $session{'CurrentUser'}) ) {

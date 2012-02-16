@@ -1331,11 +1331,12 @@ sub CreateTicket {
     );
 
     my $MIMEObj = MakeMIMEEntity(
-        Subject => $ARGS{'Subject'},
-        From    => $ARGS{'From'},
-        Cc      => $ARGS{'Cc'},
-        Body    => $sigless,
-        Type    => $ARGS{'ContentType'},
+        Subject   => $ARGS{'Subject'},
+        From      => $ARGS{'From'},
+        Cc        => $ARGS{'Cc'},
+        Body      => $sigless,
+        Type      => $ARGS{'ContentType'},
+        Interface => 'Web',
     );
 
     if ( $ARGS{'Attachments'} ) {
@@ -1551,9 +1552,10 @@ sub ProcessUpdateMessage {
     }
 
     my $Message = MakeMIMEEntity(
-        Subject => $args{ARGSRef}->{'UpdateSubject'},
-        Body    => $args{ARGSRef}->{'UpdateContent'},
-        Type    => $args{ARGSRef}->{'UpdateContentType'},
+        Subject   => $args{ARGSRef}->{'UpdateSubject'},
+        Body      => $args{ARGSRef}->{'UpdateContent'},
+        Type      => $args{ARGSRef}->{'UpdateContentType'},
+        Interface => 'Web',
     );
 
     $Message->head->replace( 'Message-ID' => Encode::encode_utf8(
@@ -1689,7 +1691,7 @@ sub MakeMIMEEntity {
     my $Message = MIME::Entity->build(
         Type    => 'multipart/mixed',
         "Message-Id" => RT::Interface::Email::GenMessageId,
-        "X-RT-Received-IP" => $ENV{'REMOTE_ADDR'},
+        "X-RT-Interface" => $args{Interface},
         map { $_ => Encode::encode_utf8( $args{ $_} ) }
             grep defined $args{$_}, qw(Subject From Cc)
     );

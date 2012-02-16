@@ -129,6 +129,7 @@ if ($ARGS{'id'} eq 'new') {
 
     ($TicketObj, @Actions) = CreateTicket(
         Attachments => delete $session{'Attachments'},
+        Interface => 'Web',
         %ARGS,
     );
     unless ( $TicketObj->CurrentUserHasRight('ShowTicket') ) {

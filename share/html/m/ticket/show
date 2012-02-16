@@ -71,6 +71,7 @@ if ($ARGS{'id'} eq 'new') {
 
     ($Ticket, @Actions) = CreateTicket(
         Attachments => delete $session{'Attachments'},
+        Interface   => 'Mobile',
         %ARGS,
     );
     unless ( $Ticket->CurrentUserHasRight('ShowTicket') ) {

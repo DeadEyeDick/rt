@@ -173,6 +173,7 @@ else {
                     Subject => $v{Subject},
                     Data => $text,
                     'X-RT-Received-IP' => $ENV{REMOTE_ADDR},
+                    'X-RT-Interface'   => 'REST',
                 );
         }
 
