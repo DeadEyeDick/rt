@@ -53,5 +53,57 @@ $m->click_button(name => 'ResetSearchOptions');
 $m->form_name('BuildQuery');
 isnt($m->value('OrderBy', 2), 'Due', 'Custom prefs were cleared');
 
+$m->get($url.'Prefs/MyRT.html');
+
+diag("Verifying Dashboards are not a default");
+{
+    lacks_dashboards_ok('body-Selected', "'Dashboards' is not a default pref");
+}
+{ undef $m; done_testing(); exit } # XXX
+
+diag("Adding a component to body prefs");
+{
+    $m->form_name('SelectionBox-body');
+    $m->field('body-Available' => 'component-Dashboards');
+    $m->click_button(name => 'Add');
+    has_dashboards_ok('body-Selected', 'Dashboards are now in the prefs');
+}
+
+diag("Resetting the body prefs");
+{
+    $m->submit_form(fields => {Reset => 1});
+
+    lacks_dashboard_ok('body-Selected', 'Dashboards are no longer in the prefs');
+}
+
 undef $m;
 done_testing();
+
+sub _has_dashboards {
+    my $input_name = shift;
+    $m->form_name('SelectionBox-body');
+
+    # Load the potential value of each input in the select
+    my @selected_values = grep { defined }
+                          map { $_->possible_values }
+                          $m->current_form->find_input($input_name);
+
+    my $has_dashboards = grep { $_ eq 'component-Dashboards' } @selected_values;
+    return $has_dashboards;
+}
+
+sub lacks_dashboards_ok {
+    my ($input_name, $message) = @_;
+    local $Test::Builder::Level = $Test::Builder::Level + 1;
+
+    my $has_dashboards = _has_dashboards($input_name);
+    ok(!$has_dashboards, $message);
+}
+
+sub has_dashboards_ok {
+    my ($input_name, $message) = @_;
+    local $Test::Builder::Level = $Test::Builder::Level + 1;
+
+    my $has_dashboards = _has_dashboards($input_name);
+    ok($has_dashboards, $message);
+}
