@@ -83,14 +83,6 @@ jQuery(  function () {
 });
 --></script>
 % }
-% if (@category) {
-%# this hidden select is to supply a full list of values,
-%# see filter_cascade() in js/cascaded.js
-      <select name="<%$id%>-Values-Complete" id="<%$id%>-Values-Complete" class="hidden" disabled="disabled">
-        <option value=""<% !$selected && qq[ selected="selected"] |n %>><&|/l&>(no value)</&></option>
-%       $m->out($out);
-      </select>
-% }
 
 % if ( $RenderType eq 'List' ) {
 <fieldset class="cfedit">
@@ -111,6 +103,14 @@ jQuery(  function () {
 </div>
 </fieldset>
 % } else {
+% if (@category) {
+%# this hidden select is to supply a full list of values,
+%# see filter_cascade() in js/cascaded.js
+      <select name="<%$id%>-Values-Complete" id="<%$id%>-Values-Complete" class="hidden" disabled="disabled">
+        <option value=""<% !$selected && qq[ selected="selected"] |n %>><&|/l&>(no value)</&></option>
+%       $m->out($out);
+      </select>
+% }
 <select
   name="<%$id%>-Values" id="<%$id%>-Values" class="CF-<%$CustomField->id%>-Edit"
 % if ( $Rows && ( $Multiple || !@category ) ) {
