@@ -46,6 +46,30 @@
 %#
 %# END BPS TAGGED BLOCK }}}
 function filter_cascade (id, val) {
+    var element = document.getElementById(id);
+    if (!element) { return };
+
+    if ( element.tagName == 'SELECT' ) {
+        return filter_cascade_select.apply(this, arguments);
+    }
+    else {
+        // it's checkbox or radio
+        if ( val == '' && arguments.length == 3 ) {
+            // no category, and the category is from a hierchical cf;
+            // leave it empty
+            jQuery(element).find('input').attr('disabled', 'disabled').hide();
+        }
+        else if ( val == '' ) {
+            jQuery(element).find('div').show().find('input:disabled').attr('disabled', '');
+        }
+        else {
+            jQuery(element).find('div').hide().find('input').attr('disabled', 'disabled');
+            jQuery(element).find('div[name^=' + val + ']').show().find('input').attr('disabled', '');
+        }
+    }
+}
+
+function filter_cascade_select (id, val) {
     var select = document.getElementById(id);
     var complete_select = document.getElementById(id + "-Complete" );
 
