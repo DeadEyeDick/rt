@@ -67,7 +67,7 @@ function filter_cascade (id, val) {
                 jQuery(element).find('div').hide().find('input').attr('disabled', 'disabled');
                 jQuery(element).find('div[name^=' + val + ']').show().find('input').attr('disabled', '');
             }
-            jQuery(element).find('div.none').show();
+            jQuery(element).find('div.none').show().find('input').attr('disabled','');
         }
     }
 }
