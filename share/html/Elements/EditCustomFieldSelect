@@ -88,8 +88,10 @@ jQuery(  function () {
 <fieldset class="cfedit">
 <div name="<%$id%>-Values" id="<%$id%>-Values">
 %   if ( $checktype eq 'radio' ) {
+    <div class="none">
   <input class="none" type="<% $checktype %>" name="<% $name %>" id="<% $name %>-none" value="" <% keys %default ? '' : ' checked="checked"' |n%> />
   <label for="<% $name %>-none"><&|/l&>(no value)</&></label><br />
+    </div>
 %   }
 %   my $CFVs = $CustomField->Values;
 %   while ( my $value = $CFVs->Next ) {

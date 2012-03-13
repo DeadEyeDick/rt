@@ -57,14 +57,17 @@ function filter_cascade (id, val) {
         if ( val == '' && arguments.length == 3 ) {
             // no category, and the category is from a hierchical cf;
             // leave it empty
-            jQuery(element).find('input').attr('disabled', 'disabled').hide();
-        }
-        else if ( val == '' ) {
-            jQuery(element).find('div').show().find('input:disabled').attr('disabled', '');
+            jQuery(element).find('div').hide();
         }
         else {
-            jQuery(element).find('div').hide().find('input').attr('disabled', 'disabled');
-            jQuery(element).find('div[name^=' + val + ']').show().find('input').attr('disabled', '');
+            if ( val == '' ) {
+                jQuery(element).find('div').show().find('input:disabled').attr('disabled', '');
+            }
+            else {
+                jQuery(element).find('div').hide().find('input').attr('disabled', 'disabled');
+                jQuery(element).find('div[name^=' + val + ']').show().find('input').attr('disabled', '');
+            }
+            jQuery(element).find('div.none').show();
         }
     }
 }
