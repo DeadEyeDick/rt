@@ -53,15 +53,29 @@
 my $term = (split /\n/, $ARGS{term} || '')[-1];
 
 my $CustomField;
+
+my ( $Type, $ObjectId );
+
 for my $k ( keys %ARGS ) {
-    next unless $k =~ /^Object-.*?-\d*-CustomField-(\d+)-Values?$/;
-    $CustomField = $1;
+    next unless $k =~ /^Object-(.*?)-(\d*)-CustomField-(\d+)-Values?$/;
+    $Type = $1;
+    $ObjectId = $2;
+    $CustomField = $3;
     last;
 }
 
 $m->abort unless $CustomField;
 my $CustomFieldObj = RT::CustomField->new( $session{'CurrentUser'} );
 $CustomFieldObj->Load( $CustomField );
+$m->abort unless $CustomFieldObj->id;
+
+if ( $Type eq 'RT::Ticket' && $ObjectId) {
+    my $ticket = RT::Ticket->new( $session{'CurrentUser'} );
+    $ticket->Load($ObjectId);
+    if ( $ticket->id ) {
+        $CustomFieldObj->SetContextObject( $ticket->QueueObj );
+    }
+}
 
 my $values = $CustomFieldObj->Values;
 $values->Limit(
