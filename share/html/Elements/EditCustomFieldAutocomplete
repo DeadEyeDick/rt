@@ -52,7 +52,7 @@
 var id = '<% $name . '-Values' %>';
 id = id.replace(/:/g,'\\:');
 jQuery('#'+id).autocomplete( {
-    source: "<%RT->Config->Get('WebPath')%>/Helpers/Autocomplete/CustomFieldValues?<% $name . '-Values' %>",
+    source: "<%RT->Config->Get('WebPath')%>/Helpers/Autocomplete/CustomFieldValues?<% $name . '-Values' %><% $ARGS{Queue} ? "&Queue=$ARGS{Queue}" : '' |n %>",
     focus: function () {
         // prevent value inserted on focus
         return false;
@@ -76,7 +76,7 @@ jQuery('#'+id).autocomplete( {
 var id = '<% $name . '-Value' %>';
 id = id.replace(/:/g,'\\:');
 jQuery('#'+id).autocomplete( {
-    source: "<%RT->Config->Get('WebPath')%>/Helpers/Autocomplete/CustomFieldValues?<% $name . '-Value' %>",
+    source: "<%RT->Config->Get('WebPath')%>/Helpers/Autocomplete/CustomFieldValues?<% $name . '-Value' %><% $ARGS{Queue} ? "&Queue=$ARGS{Queue}" : '' |n %>"
 }
 );
 % }

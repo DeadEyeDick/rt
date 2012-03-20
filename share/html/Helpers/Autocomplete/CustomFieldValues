@@ -76,6 +76,13 @@ if ( $Type eq 'RT::Ticket' && $ObjectId) {
         $CustomFieldObj->SetContextObject( $ticket->QueueObj );
     }
 }
+elsif ( $ARGS{Queue} ) {
+    my $queue = RT::Queue->new( $session{'CurrentUser'} );
+    $queue->Load($ARGS{Queue});
+    if ( $queue->id ) {
+        $CustomFieldObj->SetContextObject( $queue );
+    }
+}
 
 my $values = $CustomFieldObj->Values;
 $values->Limit(
