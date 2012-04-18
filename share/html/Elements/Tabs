@@ -811,7 +811,20 @@ my $build_main_nav = sub {
     }
 
     PageWidgets()->child( simple_search => raw_html => $m->scomp('SimpleSearch') );
-    PageWidgets()->child( create_ticket => raw_html => $m->scomp('CreateTicket') );
+
+    my $can_create_ticket;
+    my $queues = RT::Queues->new( $session{'CurrentUser'} );
+    $queues->UnLimit;
+
+    while ( my $queue = $queues->Next ) {
+        next unless $queue->CurrentUserHasRight('CreateTicket');
+        $can_create_ticket = 1;
+        last;
+    }
+
+    if ( $can_create_ticket ) {
+        PageWidgets()->child( create_ticket => raw_html => $m->scomp('CreateTicket') );
+    }
 
     $m->callback( CallbackName => 'Privileged' );
 };
