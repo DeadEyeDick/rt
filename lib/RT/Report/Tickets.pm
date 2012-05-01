@@ -62,6 +62,69 @@ sub Groupings {
         Queue
     );
 
+    # 'Owner Name' # loc
+    # 'Owner EmailAddress' # loc
+    # 'Owner RealName' # loc
+    # 'Owner NickName' # loc
+    # 'Owner Organization' # loc
+    # 'Owner Lang' # loc
+    # 'Owner City' # loc
+    # 'Owner Country' # loc
+    # 'Owner Timezone' # loc
+    # 'Creator Name' # loc
+    # 'Creator EmailAddress' # loc
+    # 'Creator RealName' # loc
+    # 'Creator NickName' # loc
+    # 'Creator Organization' # loc
+    # 'Creator Lang' # loc
+    # 'Creator City' # loc
+    # 'Creator Country' # loc
+    # 'Creator Timezone' # loc
+    # 'LastUpdatedBy Name' # loc
+    # 'LastUpdatedBy EmailAddress' # loc
+    # 'LastUpdatedBy RealName' # loc
+    # 'LastUpdatedBy NickName' # loc
+    # 'LastUpdatedBy Organization' # loc
+    # 'LastUpdatedBy Lang' # loc
+    # 'LastUpdatedBy City' # loc
+    # 'LastUpdatedBy Country' # loc
+    # 'LastUpdatedBy Timezone' # loc
+    # 'Requestor Name' # loc
+    # 'Requestor EmailAddress' # loc
+    # 'Requestor RealName' # loc
+    # 'Requestor NickName' # loc
+    # 'Requestor Organization' # loc
+    # 'Requestor Lang' # loc
+    # 'Requestor City' # loc
+    # 'Requestor Country' # loc
+    # 'Requestor Timezone' # loc
+    # 'Cc Name' # loc
+    # 'Cc EmailAddress' # loc
+    # 'Cc RealName' # loc
+    # 'Cc NickName' # loc
+    # 'Cc Organization' # loc
+    # 'Cc Lang' # loc
+    # 'Cc City' # loc
+    # 'Cc Country' # loc
+    # 'Cc Timezone' # loc
+    # 'AdminCc Name' # loc
+    # 'AdminCc EmailAddress' # loc
+    # 'AdminCc RealName' # loc
+    # 'AdminCc NickName' # loc
+    # 'AdminCc Organization' # loc
+    # 'AdminCc Lang' # loc
+    # 'AdminCc City' # loc
+    # 'AdminCc Country' # loc
+    # 'AdminCc Timezone' # loc
+    # 'Watcher Name' # loc
+    # 'Watcher EmailAddress' # loc
+    # 'Watcher RealName' # loc
+    # 'Watcher NickName' # loc
+    # 'Watcher Organization' # loc
+    # 'Watcher Lang' # loc
+    # 'Watcher City' # loc
+    # 'Watcher Country' # loc
+    # 'Watcher Timezone' # loc
     foreach my $type ( qw(Owner Creator LastUpdatedBy Requestor Cc AdminCc Watcher) ) {
         push @fields, $type.' '.$_, $type.'.'.$_ foreach qw(
             Name EmailAddress RealName NickName Organization Lang City Country Timezone
@@ -69,6 +132,34 @@ sub Groupings {
     }
 
 
+    # 'DueHourly' # loc
+    # 'DueDaily' # loc
+    # 'DueMonthly' # loc
+    # 'DueAnnually' # loc
+    # 'ResolvedHourly' # loc
+    # 'ResolvedDaily' # loc
+    # 'ResolvedMonthly' # loc
+    # 'ResolvedAnnually' # loc
+    # 'CreatedHourly' # loc
+    # 'CreatedDaily' # loc
+    # 'CreatedMonthly' # loc
+    # 'CreatedAnnually' # loc
+    # 'LastUpdatedHourly' # loc
+    # 'LastUpdatedDaily' # loc
+    # 'LastUpdatedMonthly' # loc
+    # 'LastUpdatedAnnually' # loc
+    # 'StartedHourly' # loc
+    # 'StartedDaily' # loc
+    # 'StartedMonthly' # loc
+    # 'StartedAnnually' # loc
+    # 'StartsHourly' # loc
+    # 'StartsDaily' # loc
+    # 'StartsMonthly' # loc
+    # 'StartsAnnually' # loc
+    # 'ToldHourly' # loc
+    # 'ToldDaily' # loc
+    # 'ToldMonthly' # loc
+    # 'ToldAnnually' # loc
     for my $field (qw(Due Resolved Created LastUpdated Started Starts Told)) {
         for my $frequency (qw(Hourly Daily Monthly Annually)) {
             my $item = $field.$frequency;
@@ -93,7 +184,8 @@ sub Groupings {
         }
         $CustomFields->LimitToGlobal;
         while ( my $CustomField = $CustomFields->Next ) {
-            push @fields, "Custom field '". $CustomField->Name ."'", "CF.{". $CustomField->id ."}";
+            # loc("Custom field '[_1]'", $CustomField->Name);
+            push @fields, ["Custom field '[_1]'", $CustomField->Name], "CF.{".  $CustomField->id ."}";
         }
     }
     return @fields;

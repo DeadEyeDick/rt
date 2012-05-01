@@ -931,6 +931,42 @@ msgstr "AdminCCGroup"
 msgid "AdminCc"
 msgstr "AdminCc"
 
+#: lib/RT/Report/Tickets.pm:116
+msgid "AdminCc City"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:117
+msgid "AdminCc Country"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:111
+msgid "AdminCc EmailAddress"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:115
+msgid "AdminCc Lang"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:110
+msgid "AdminCc Name"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:113
+msgid "AdminCc NickName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:114
+msgid "AdminCc Organization"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:112
+msgid "AdminCc RealName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:118
+msgid "AdminCc Timezone"
+msgstr ""
+
 #: lib/RT/Graph/Tickets.pm:154
 msgid "AdminCcs"
 msgstr "AdminCcs"
@@ -1467,6 +1503,42 @@ msgstr "Catégorie non sélectionnée"
 #: lib/RT/ACE.pm:101 lib/RT/Tickets.pm:139 share/html/Elements/RT__Ticket/ColumnMap:178 share/html/Search/Elements/BuildFormatString:100 share/html/SelfService/Create.html:75 share/html/Ticket/Create.html:125 share/html/Ticket/Elements/EditPeople:73 share/html/Ticket/Elements/ShowPeople:62 share/html/Ticket/Forward.html:69 share/html/m/ticket/create:303 share/html/m/ticket/show:294
 msgid "Cc"
 msgstr "Cc"
+
+#: lib/RT/Report/Tickets.pm:107
+msgid "Cc City"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:108
+msgid "Cc Country"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:102
+msgid "Cc EmailAddress"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:106
+msgid "Cc Lang"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:101
+msgid "Cc Name"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:104
+msgid "Cc NickName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:105
+msgid "Cc Organization"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:103
+msgid "Cc RealName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:109
+msgid "Cc Timezone"
+msgstr ""
 
 #: lib/RT/Graph/Tickets.pm:154
 msgid "Ccs"
@@ -2313,9 +2385,25 @@ msgstr "Recherche %1 créée"
 msgid "Created tickets in period, grouped by status"
 msgstr "Tickets créés dans une période, groupés par l'état"
 
+#: lib/RT/Report/Tickets.pm:146
+msgid "CreatedAnnually"
+msgstr ""
+
 #: share/html/Search/Elements/BuildFormatString:100
 msgid "CreatedBy"
 msgstr "CrééPar"
+
+#: lib/RT/Report/Tickets.pm:144
+msgid "CreatedDaily"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:143
+msgid "CreatedHourly"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:145
+msgid "CreatedMonthly"
+msgstr ""
 
 #: share/html/Search/Elements/BuildFormatString:100
 msgid "CreatedRelative"
@@ -2324,6 +2412,42 @@ msgstr "CrééDepuis"
 #: lib/RT/Graph/Tickets.pm:154 lib/RT/Tickets.pm:103 share/html/Search/Elements/PickBasics:115
 msgid "Creator"
 msgstr "Créateur"
+
+#: lib/RT/Report/Tickets.pm:80
+msgid "Creator City"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:81
+msgid "Creator Country"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:75
+msgid "Creator EmailAddress"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:79
+msgid "Creator Lang"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:74
+msgid "Creator Name"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:77
+msgid "Creator NickName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:78
+msgid "Creator Organization"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:76
+msgid "Creator RealName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:82
+msgid "Creator Timezone"
+msgstr ""
 
 #: share/html/Prefs/Other.html:70
 msgid "Cryptography"
@@ -2414,7 +2538,8 @@ msgstr "Le champ personnalisé %1 n'a pas de valeur."
 msgid "Custom field %1 not found"
 msgstr "Le champ personnalisé %1 est introuvable"
 
-#: lib/RT/Report/Tickets.pm:107 lib/RT/Report/Tickets.pm:110
+#: lib/RT/Report/Tickets.pm:187 lib/RT/Report/Tickets.pm:199 lib/RT/Report/Tickets.pm:202
+#. ($CustomField->Name)
 #. ($cf)
 #. ($obj->Name)
 msgid "Custom field '%1'"
@@ -2918,6 +3043,22 @@ msgstr "Liste déroulante"
 #: lib/RT/Graph/Tickets.pm:155 lib/RT/Ticket.pm:934 lib/RT/Tickets.pm:128 share/html/Elements/RT__Ticket/ColumnMap:203 share/html/Elements/RT__Ticket/ColumnMap:236 share/html/Elements/SelectDateType:55 share/html/Elements/ShowReminders:52 share/html/Search/Elements/BuildFormatString:100 share/html/Ticket/Create.html:240 share/html/Ticket/Elements/EditDates:68 share/html/Ticket/Elements/Reminders:131 share/html/Ticket/Elements/Reminders:151 share/html/Ticket/Elements/Reminders:81 share/html/Ticket/Elements/ShowDates:66 share/html/m/ticket/create:404 share/html/m/ticket/show:389
 msgid "Due"
 msgstr "Échéance"
+
+#: lib/RT/Report/Tickets.pm:138
+msgid "DueAnnually"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:136
+msgid "DueDaily"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:135
+msgid "DueHourly"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:137
+msgid "DueMonthly"
+msgstr ""
 
 #: share/html/Search/Elements/BuildFormatString:100
 msgid "DueRelative"
@@ -4273,9 +4414,61 @@ msgstr "Dernière MAJ par"
 msgid "LastUpdated"
 msgstr "DateDernièreMAJ"
 
+#: lib/RT/Report/Tickets.pm:150
+msgid "LastUpdatedAnnually"
+msgstr ""
+
 #: lib/RT/Graph/Tickets.pm:154 lib/RT/Tickets.pm:104 share/html/Search/Elements/BuildFormatString:100
 msgid "LastUpdatedBy"
 msgstr "DernièreMAJPar"
+
+#: lib/RT/Report/Tickets.pm:89
+msgid "LastUpdatedBy City"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:90
+msgid "LastUpdatedBy Country"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:84
+msgid "LastUpdatedBy EmailAddress"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:88
+msgid "LastUpdatedBy Lang"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:83
+msgid "LastUpdatedBy Name"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:86
+msgid "LastUpdatedBy NickName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:87
+msgid "LastUpdatedBy Organization"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:85
+msgid "LastUpdatedBy RealName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:91
+msgid "LastUpdatedBy Timezone"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:148
+msgid "LastUpdatedDaily"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:147
+msgid "LastUpdatedHourly"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:149
+msgid "LastUpdatedMonthly"
+msgstr ""
 
 #: share/html/Search/Elements/BuildFormatString:100
 msgid "LastUpdatedRelative"
@@ -5989,6 +6182,42 @@ msgstr "Intervenant"
 msgid "Owner '%1' does not have rights to own this ticket."
 msgstr "L'intervenant '%1' n'a pas les droits pour s'approprier ce ticket."
 
+#: lib/RT/Report/Tickets.pm:71
+msgid "Owner City"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:72
+msgid "Owner Country"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:66
+msgid "Owner EmailAddress"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:70
+msgid "Owner Lang"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:65
+msgid "Owner Name"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:68
+msgid "Owner NickName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:69
+msgid "Owner Organization"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:67
+msgid "Owner RealName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:73
+msgid "Owner Timezone"
+msgstr ""
+
 #: lib/RT/Ticket.pm:2999
 #. ($OldOwnerObj->Name, $NewOwnerObj->Name)
 msgid "Owner changed from %1 to %2"
@@ -6772,6 +7001,42 @@ msgstr "Rapports"
 msgid "Requestor"
 msgstr "Demandeur"
 
+#: lib/RT/Report/Tickets.pm:98
+msgid "Requestor City"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:99
+msgid "Requestor Country"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:93
+msgid "Requestor EmailAddress"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:97
+msgid "Requestor Lang"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:92
+msgid "Requestor Name"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:95
+msgid "Requestor NickName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:96
+msgid "Requestor Organization"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:94
+msgid "Requestor RealName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:100
+msgid "Requestor Timezone"
+msgstr ""
+
 #: lib/RT/Tickets.pm:149
 msgid "RequestorGroup"
 msgstr "GroupeDemandeur"
@@ -6837,6 +7102,22 @@ msgstr "Tickets résolus dans la période, groupés par intervenant"
 #: NOT FOUND IN SOURCE
 msgid "Resolved tickets, grouped by owner"
 msgstr "Tickets résolus, groupés par intervenant"
+
+#: lib/RT/Report/Tickets.pm:142
+msgid "ResolvedAnnually"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:140
+msgid "ResolvedDaily"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:139
+msgid "ResolvedHourly"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:141
+msgid "ResolvedMonthly"
+msgstr ""
 
 #: share/html/Search/Elements/BuildFormatString:100
 msgid "ResolvedRelative"
@@ -7696,6 +7977,22 @@ msgstr ""
 msgid "Started"
 msgstr "Ouvert le"
 
+#: lib/RT/Report/Tickets.pm:154
+msgid "StartedAnnually"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:152
+msgid "StartedDaily"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:151
+msgid "StartedHourly"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:153
+msgid "StartedMonthly"
+msgstr ""
+
 #: share/html/Search/Elements/BuildFormatString:100
 msgid "StartedRelative"
 msgstr "OuvertDepuis"
@@ -7703,6 +8000,22 @@ msgstr "OuvertDepuis"
 #: lib/RT/Graph/Tickets.pm:155 lib/RT/Tickets.pm:126 share/html/Elements/RT__Ticket/ColumnMap:188 share/html/Elements/RT__Ticket/ColumnMap:221 share/html/Elements/SelectDateType:54 share/html/Search/Elements/BuildFormatString:100 share/html/Ticket/Create.html:239 share/html/Ticket/Elements/EditDates:50 share/html/Ticket/Elements/ShowDates:54 share/html/m/ticket/create:403 share/html/m/ticket/show:377
 msgid "Starts"
 msgstr "Débute"
+
+#: lib/RT/Report/Tickets.pm:158
+msgid "StartsAnnually"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:156
+msgid "StartsDaily"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:155
+msgid "StartsHourly"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:157
+msgid "StartsMonthly"
+msgstr ""
 
 #: share/html/Search/Elements/BuildFormatString:100
 msgid "StartsRelative"
@@ -8475,6 +8788,22 @@ msgstr ""
 msgid "Told"
 msgstr "Annoncé"
 
+#: lib/RT/Report/Tickets.pm:162
+msgid "ToldAnnually"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:160
+msgid "ToldDaily"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:159
+msgid "ToldHourly"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:161
+msgid "ToldMonthly"
+msgstr ""
+
 #: share/html/Search/Elements/BuildFormatString:100
 msgid "ToldRelative"
 msgstr "AnnoncéDepuis"
@@ -9084,6 +9413,42 @@ msgstr "ObserverCommeAdminCC"
 #: lib/RT/Tickets.pm:141
 msgid "Watcher"
 msgstr "Observateur"
+
+#: lib/RT/Report/Tickets.pm:125
+msgid "Watcher City"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:126
+msgid "Watcher Country"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:120
+msgid "Watcher EmailAddress"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:124
+msgid "Watcher Lang"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:119
+msgid "Watcher Name"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:122
+msgid "Watcher NickName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:123
+msgid "Watcher Organization"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:121
+msgid "Watcher RealName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:127
+msgid "Watcher Timezone"
+msgstr ""
 
 #: lib/RT/Tickets.pm:152
 msgid "WatcherGroup"

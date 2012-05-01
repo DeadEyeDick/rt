@@ -1243,6 +1243,42 @@ msgstr "管理員副本群組"
 msgid "AdminCc"
 msgstr "管理員副本"
 
+#: lib/RT/Report/Tickets.pm:116
+msgid "AdminCc City"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:117
+msgid "AdminCc Country"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:111
+msgid "AdminCc EmailAddress"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:115
+msgid "AdminCc Lang"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:110
+msgid "AdminCc Name"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:113
+msgid "AdminCc NickName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:114
+msgid "AdminCc Organization"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:112
+msgid "AdminCc RealName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:118
+msgid "AdminCc Timezone"
+msgstr ""
+
 #: NOT FOUND IN SOURCE
 msgid "AdminCc.EmailAddress"
 msgstr "管理員副本: 電子郵件信箱"
@@ -2015,6 +2051,42 @@ msgstr "類別尚未設定"
 #: lib/RT/ACE.pm:101 lib/RT/Tickets.pm:139 share/html/Elements/RT__Ticket/ColumnMap:178 share/html/Search/Elements/BuildFormatString:100 share/html/SelfService/Create.html:75 share/html/Ticket/Create.html:125 share/html/Ticket/Elements/EditPeople:73 share/html/Ticket/Elements/ShowPeople:62 share/html/Ticket/Forward.html:69 share/html/m/ticket/create:303 share/html/m/ticket/show:294
 msgid "Cc"
 msgstr "副本"
+
+#: lib/RT/Report/Tickets.pm:107
+msgid "Cc City"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:108
+msgid "Cc Country"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:102
+msgid "Cc EmailAddress"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:106
+msgid "Cc Lang"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:101
+msgid "Cc Name"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:104
+msgid "Cc NickName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:105
+msgid "Cc Organization"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:103
+msgid "Cc RealName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:109
+msgid "Cc Timezone"
+msgstr ""
 
 #: NOT FOUND IN SOURCE
 msgid "Cc Type"
@@ -3137,9 +3209,25 @@ msgstr "在指定日期內建立的申請單，依狀態分組"
 msgid "Created workflow %1"
 msgstr "流程 %1 新增成功"
 
+#: lib/RT/Report/Tickets.pm:146
+msgid "CreatedAnnually"
+msgstr ""
+
 #: share/html/Search/Elements/BuildFormatString:100
 msgid "CreatedBy"
 msgstr "建立人"
+
+#: lib/RT/Report/Tickets.pm:144
+msgid "CreatedDaily"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:143
+msgid "CreatedHourly"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:145
+msgid "CreatedMonthly"
+msgstr ""
 
 #: share/html/Search/Elements/BuildFormatString:100
 msgid "CreatedRelative"
@@ -3148,6 +3236,42 @@ msgstr "實際新增日(相對值)"
 #: lib/RT/Graph/Tickets.pm:154 lib/RT/Tickets.pm:103 share/html/Search/Elements/PickBasics:115
 msgid "Creator"
 msgstr "建立者"
+
+#: lib/RT/Report/Tickets.pm:80
+msgid "Creator City"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:81
+msgid "Creator Country"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:75
+msgid "Creator EmailAddress"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:79
+msgid "Creator Lang"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:74
+msgid "Creator Name"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:77
+msgid "Creator NickName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:78
+msgid "Creator Organization"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:76
+msgid "Creator RealName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:82
+msgid "Creator Timezone"
+msgstr ""
 
 #: share/html/Prefs/Other.html:70
 msgid "Cryptography"
@@ -3282,7 +3406,8 @@ msgstr "自訂欄位 %1 沒有值"
 msgid "Custom field %1 not found"
 msgstr "找不到自訂欄位 %1"
 
-#: lib/RT/Report/Tickets.pm:107 lib/RT/Report/Tickets.pm:110
+#: lib/RT/Report/Tickets.pm:187 lib/RT/Report/Tickets.pm:199 lib/RT/Report/Tickets.pm:202
+#. ($CustomField->Name)
 #. ($cf)
 #. ($obj->Name)
 msgid "Custom field '%1'"
@@ -3994,6 +4119,22 @@ msgstr "截止日"
 #: NOT FOUND IN SOURCE
 msgid "Due date '%1' could not be parsed"
 msgstr "無法解讀日期 '%1'"
+
+#: lib/RT/Report/Tickets.pm:138
+msgid "DueAnnually"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:136
+msgid "DueDaily"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:135
+msgid "DueHourly"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:137
+msgid "DueMonthly"
+msgstr ""
 
 #: share/html/Search/Elements/BuildFormatString:100
 msgid "DueRelative"
@@ -5905,9 +6046,61 @@ msgstr "最後更新由"
 msgid "LastUpdated"
 msgstr "上次更新"
 
+#: lib/RT/Report/Tickets.pm:150
+msgid "LastUpdatedAnnually"
+msgstr ""
+
 #: lib/RT/Graph/Tickets.pm:154 lib/RT/Tickets.pm:104 share/html/Search/Elements/BuildFormatString:100
 msgid "LastUpdatedBy"
 msgstr "上次更新者"
+
+#: lib/RT/Report/Tickets.pm:89
+msgid "LastUpdatedBy City"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:90
+msgid "LastUpdatedBy Country"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:84
+msgid "LastUpdatedBy EmailAddress"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:88
+msgid "LastUpdatedBy Lang"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:83
+msgid "LastUpdatedBy Name"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:86
+msgid "LastUpdatedBy NickName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:87
+msgid "LastUpdatedBy Organization"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:85
+msgid "LastUpdatedBy RealName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:91
+msgid "LastUpdatedBy Timezone"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:148
+msgid "LastUpdatedDaily"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:147
+msgid "LastUpdatedHourly"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:149
+msgid "LastUpdatedMonthly"
+msgstr ""
 
 #: share/html/Search/Elements/BuildFormatString:100
 msgid "LastUpdatedRelative"
@@ -7945,6 +8138,42 @@ msgstr "承辦人"
 msgid "Owner '%1' does not have rights to own this ticket."
 msgstr "擁有人'%1'沒有權限擁有此申請單"
 
+#: lib/RT/Report/Tickets.pm:71
+msgid "Owner City"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:72
+msgid "Owner Country"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:66
+msgid "Owner EmailAddress"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:70
+msgid "Owner Lang"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:65
+msgid "Owner Name"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:68
+msgid "Owner NickName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:69
+msgid "Owner Organization"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:67
+msgid "Owner RealName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:73
+msgid "Owner Timezone"
+msgstr ""
+
 #: lib/RT/Ticket.pm:2999
 #. ($OldOwnerObj->Name, $NewOwnerObj->Name)
 msgid "Owner changed from %1 to %2"
@@ -9076,6 +9305,42 @@ msgstr "報表"
 msgid "Requestor"
 msgstr "申請人"
 
+#: lib/RT/Report/Tickets.pm:98
+msgid "Requestor City"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:99
+msgid "Requestor Country"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:93
+msgid "Requestor EmailAddress"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:97
+msgid "Requestor Lang"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:92
+msgid "Requestor Name"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:95
+msgid "Requestor NickName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:96
+msgid "Requestor Organization"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:94
+msgid "Requestor RealName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:100
+msgid "Requestor Timezone"
+msgstr ""
+
 #: NOT FOUND IN SOURCE
 msgid "Requestor email address"
 msgstr "申請人電子郵件信箱位址"
@@ -9173,6 +9438,22 @@ msgstr "已在指定日期內內解決，依承辦人分組"
 #: NOT FOUND IN SOURCE
 msgid "Resolved tickets, grouped by owner"
 msgstr "已解決的申請單，依承辦人分組"
+
+#: lib/RT/Report/Tickets.pm:142
+msgid "ResolvedAnnually"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:140
+msgid "ResolvedDaily"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:139
+msgid "ResolvedHourly"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:141
+msgid "ResolvedMonthly"
+msgstr ""
 
 #: share/html/Search/Elements/BuildFormatString:100
 msgid "ResolvedRelative"
@@ -10244,6 +10525,22 @@ msgstr "實際起始日"
 msgid "Started date '%1' could not be parsed"
 msgstr "無法解讀起始日期 '%1"
 
+#: lib/RT/Report/Tickets.pm:154
+msgid "StartedAnnually"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:152
+msgid "StartedDaily"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:151
+msgid "StartedHourly"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:153
+msgid "StartedMonthly"
+msgstr ""
+
 #: share/html/Search/Elements/BuildFormatString:100
 msgid "StartedRelative"
 msgstr "實際起始日(相對值)"
@@ -10259,6 +10556,22 @@ msgstr "應起始日"
 #: NOT FOUND IN SOURCE
 msgid "Starts date '%1' could not be parsed"
 msgstr "無法解讀起始日期 '%1"
+
+#: lib/RT/Report/Tickets.pm:158
+msgid "StartsAnnually"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:156
+msgid "StartsDaily"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:155
+msgid "StartsHourly"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:157
+msgid "StartsMonthly"
+msgstr ""
 
 #: share/html/Search/Elements/BuildFormatString:100
 msgid "StartsRelative"
@@ -11243,6 +11556,22 @@ msgstr "切換堆疊軌跡"
 msgid "Told"
 msgstr "告知日"
 
+#: lib/RT/Report/Tickets.pm:162
+msgid "ToldAnnually"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:160
+msgid "ToldDaily"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:159
+msgid "ToldHourly"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:161
+msgid "ToldMonthly"
+msgstr ""
+
 #: share/html/Search/Elements/BuildFormatString:100
 msgid "ToldRelative"
 msgstr "告知日(相對值)"
@@ -11964,6 +12293,42 @@ msgstr "以管理員副本收件人身份視察"
 #: lib/RT/Tickets.pm:141
 msgid "Watcher"
 msgstr "視察員"
+
+#: lib/RT/Report/Tickets.pm:125
+msgid "Watcher City"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:126
+msgid "Watcher Country"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:120
+msgid "Watcher EmailAddress"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:124
+msgid "Watcher Lang"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:119
+msgid "Watcher Name"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:122
+msgid "Watcher NickName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:123
+msgid "Watcher Organization"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:121
+msgid "Watcher RealName"
+msgstr ""
+
+#: lib/RT/Report/Tickets.pm:127
+msgid "Watcher Timezone"
+msgstr ""
 
 #: NOT FOUND IN SOURCE
 msgid "Watcher loaded"

@@ -1812,7 +1812,8 @@ msgstr "Custom field %1 has no value."
 msgid "Custom field %1 not found"
 msgstr "Custom field %1 not found"
 
-#: lib/RT/Report/Tickets.pm:107 lib/RT/Report/Tickets.pm:110
+#: lib/RT/Report/Tickets.pm:187 lib/RT/Report/Tickets.pm:199 lib/RT/Report/Tickets.pm:202
+#. ($CustomField->Name)
 #. ($cf)
 #. ($obj->Name)
 msgid "Custom field '%1'"
