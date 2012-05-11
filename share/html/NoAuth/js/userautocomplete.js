@@ -69,8 +69,17 @@ jQuery(function() {
         if (!inputName || !inputName.match(applyto))
             continue;
 
+	var path_re = /SelfService/;
+	var autocomplete_path;
+	if (path_re.test(window.location.pathname)){
+	    autocomplete_path = "<% RT->Config->Get('WebPath')%>/SelfService/Autocomplete/Users";
+	}
+	else{
+	    autocomplete_path = "<% RT->Config->Get('WebPath')%>/Helpers/Autocomplete/Users";
+	}
+
         var options = {
-            source: "<% RT->Config->Get('WebPath')%>/Helpers/Autocomplete/Users"
+            source: autocomplete_path
         };
 
         var queryargs = [];
