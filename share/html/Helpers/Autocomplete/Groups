@@ -46,43 +46,21 @@
 %#
 %# END BPS TAGGED BLOCK }}}
 % $r->content_type('application/json');
-<% JSON( \@suggestions ) |n %>
+<% JSON( $suggestions ) |n %>
 % $m->abort;
-<%ARGS>
-$term => undef
-$max => 10
-$exclude => ''
-$op => 'LIKE'
-</%ARGS>
 <%INIT>
-$m->abort unless defined $term
-             and length $term;
+use RT::Autocomplete::Groups;
 
-my $CurrentUser = $session{'CurrentUser'};
+# Constructor wants uppercase first letter params.
+%ARGS = map { ucfirst ($_) => $ARGS{$_} } keys %ARGS;
 
-# Require privileged users
-$m->abort unless $CurrentUser->Privileged;
+my $auto = RT::Autocomplete::Groups->new(
+	   CurrentUser => $session{'CurrentUser'}, %ARGS);
 
-# Sanity check the operator
-$op = 'LIKE' unless $op =~ /^(?:LIKE|(?:START|END)SWITH|=|!=)$/i;
+my $suggestions = [];
 
-my $groups = RT::Groups->new( $CurrentUser );
-$groups->RowsPerPage( $max );
-$groups->LimitToUserDefinedGroups();
-$groups->Limit(
-    FIELD           => 'Name',
-    OPERATOR        => $op,
-    VALUE           => $term,
-);
-
-# Exclude groups we don't want
-foreach (split /\s*,\s*/, $exclude) {
-    $groups->Limit(FIELD => 'id', VALUE => $_, OPERATOR => '!=');
-}
-
-my @suggestions;
-
-while ( my $group = $groups->Next ) {
-    push @suggestions, $group->Name;
+if( $auto ){
+    my $groups = $auto->FetchSuggestions;
+    $suggestions = $auto->FormatResults($groups);
 }
 </%INIT>

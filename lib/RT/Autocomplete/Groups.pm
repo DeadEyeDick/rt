@@ -46,7 +46,7 @@
 #
 # END BPS TAGGED BLOCK }}}
 
-package RT::Autocomplete::Users;
+package RT::Autocomplete::Groups;
 
 use strict;
 use warnings;
@@ -54,12 +54,12 @@ use base qw( RT::Autocomplete );
 
 =head1 NAME
 
-RT::Autocomplete:Users - Autocomplete for users
+RT::Autocomplete::Groups - Autocomplete for groups
 
 =head1 DESCRIPTION
 
-Perform searches on user fields like EmailAddress and Name to find users
-to suggest in user entry fields in forms.
+Perform searches on group fields like Name to find groups
+to suggest in group entry fields in forms.
 
 =head1 METHODS
 
@@ -67,11 +67,9 @@ to suggest in user entry fields in forms.
 
 =head2 ValidateParams
 
-Validation specific to Users autocomplete. Called from parent
+Validation specific to Groups autocomplete. Called from parent
 _Init before the object is created. Receives a hashref of arguments
 passed to new.
-
-Defaults 'return' field for user searches to EmailAddress.
 
 =cut
 
@@ -80,14 +78,10 @@ sub ValidateParams {
     my $args_ref = shift;
 
     return ( 0, 'Permission Denied' )
-      unless $args_ref->{CurrentUser}->UserObj->Privileged
-	or RT->Config->Get('AllowUserAutocompleteForUnprivileged');
+      unless $args_ref->{CurrentUser}->UserObj->Privileged;
 
-    # Only allow certain return fields for User entries
-    $args_ref->{Return} = 'EmailAddress'
-      unless $args_ref->{Return} =~ /^(?:EmailAddress|Name|RealName)$/;
-
-    $args_ref->{Op} = 'STARTSWITH'
+    # Set to LIKE to allow fuzzier searching for group names
+    $args_ref->{Op} = 'LIKE'
       unless $args_ref->{Op} =~ /^(?:LIKE|(?:START|END)SWITH|=|!=)$/i;
 
     return 1;
@@ -95,78 +89,52 @@ sub ValidateParams {
 
 =head2 FetchSuggestions
 
-Main method to search for user suggestions.
+Main method to search for group suggestions.
 
-Creates an RT::Users object and searches based on Term, which should
+Creates an RT::Groups object and searches based on Term, which should
 be the first few characters a user typed.
-
-$self->Return, from the autocomplete call, determines
-which user field to search on. Also references the RT_Config
-value UserAutocompleteFields for search terms and match methods.
 
 See parent FetchSuggestions
 for additional values that can modify the search.
-
-Returns an RT::Users object which can be passed to FormatResults.
 
 =cut
 
 sub FetchSuggestions {
     my $self = shift;
 
-    my %fields = %{ RT->Config->Get('UserAutocompleteFields')
-		      || { EmailAddress => $self->Op,
-			   Name => $self->Op,
-			   RealName => 'LIKE' } };
+    my $groups = RT::Groups->new( $self->CurrentUser );
+    $groups->RowsPerPage( $self->Max );
+    $groups->LimitToUserDefinedGroups();
 
-    # If an operator is provided, check against only the returned field
-    # using that operator
-    %fields = ( $self->Return => $self->Op ) if $self->Op;
+    $groups->Limit(
+		   FIELD           => 'Name',
+		   OPERATOR        => $self->Op,
+		   VALUE           => $self->Term,
+		  );
 
-    my $users = RT::Users->new($self->CurrentUser);
-    $users->RowsPerPage($self->Max);
-
-    $users->LimitToPrivileged() if $self->Privileged;
-
-    $self->LimitForFields($users, \%fields);
-
-    # Exclude users we don't want
-    foreach ( split /\s*,\s*/, $self->Exclude ) {
-        $users->Limit( FIELD => 'id', VALUE => $_, OPERATOR => '!=' );
+    # Exclude groups we don't want
+    foreach my $exclude (split /\s*,\s*/, $self->Exclude) {
+	$groups->Limit(FIELD => 'id', VALUE => $exclude, OPERATOR => '!=');
     }
 
-    return $users;
+    return $groups;
 }
 
 =head2 FormatResults
 
-Apply final formatting to the suggestions.
-
-Accepts an RT::Users object.
+Hook for applying formating to autocomplete results.
 
 =cut
 
 sub FormatResults {
     my $self = shift;
-    my $users = shift;
+    my $groups = shift;
 
     my @suggestions;
-
-    while ( my $user = $users->Next ) {
-        next if $user->id == RT->SystemUser->id
-          or $user->id == RT->Nobody->id;
-
-        my $formatted = $HTML::Mason::Commands::m->scomp(
-			   '/Elements/ShowUser',
-                           User => $user,
-                           NoEscape => 1 );
-	$formatted =~ s/\n//g;
-        my $return = $self->Return;
-        my $suggestion = { label => $formatted, value => $user->$return };
-
-        push @suggestions, $suggestion;
+    while ( my $group = $groups->Next ) {
+	# No extra formatting right now.
+        push @suggestions, $group->Name;
     }
-
     return \@suggestions;
 }
 

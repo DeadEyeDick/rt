@@ -142,7 +142,7 @@ sub _Init {
         Max        => 10,
         Privileged => undef,
         Exclude    => '',
-        Op         => undef,
+        Op         => '',
         @_
     );
 
@@ -158,6 +158,11 @@ sub _Init {
     # Hook for child class validation.
     my ($return, $msg) = $self->ValidateParams(\%args);
     return ($return, $msg) unless $return;
+
+    # Reset op if an invalid option is passed in or set.
+    if( $args{Op} !~ /^(?:LIKE|(?:START|END)SWITH)$/i ){
+	$args{Op} = 'STARTSWITH';
+    }
 
     $self->{'Return'} = $args{Return};
 
@@ -245,9 +250,6 @@ sub LimitForFields {
     my $fields_ref = shift;
 
     while ( my ( $name, $op ) = each %{$fields_ref} ) {
-        $op = 'STARTSWITH'
-            unless $op =~ /^(?:LIKE|(?:START|END)SWITH|=|!=)$/i;
-
         $records->Limit(
             FIELD           => $name,
             OPERATOR        => $op,

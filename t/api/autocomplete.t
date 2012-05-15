@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 use RT;
-use RT::Test tests => 17;
+use RT::Test tests => 22;
 
 use_ok('RT::Autocomplete');
 
@@ -44,6 +44,26 @@ RT::Test->started_ok;
 
 test_user_autocomplete($user_b, 'b_user', 'b_us');
 
+# Create a new group
+my $group = RT::Group->new(RT->SystemUser);
+my $group_name = 'Autocomplete' . $$;
+$group->CreateUserDefinedGroup(Name => $group_name);
+ok($group->Id, "Created a new group");
+
+use_ok('RT::Autocomplete::Groups');
+
+my $auto_group = RT::Autocomplete::Groups->new(
+		       CurrentUser => RT::CurrentUser->new($user),
+		       Term        => 'uto',);
+
+isa_ok($auto_group, 'RT::Autocomplete::Groups');
+
+my $groups = $auto_group->FetchSuggestions;
+isa_ok($groups, 'RT::Groups');
+
+my $g = $groups->Next;
+is( $g->Name, $group_name, "Found $group_name group.");
+
 sub test_user_autocomplete {
     my $user = shift;
     my $name = shift;
@@ -51,7 +71,8 @@ sub test_user_autocomplete {
 
     my $auto_user = RT::Autocomplete::Users->new(
 		       CurrentUser => RT::CurrentUser->new($user),
-		       Term        => $term,);
+		       Term        => $term,
+		       Return      => 'Name');
 
     isa_ok($auto_user, 'RT::Autocomplete::Users');
 
