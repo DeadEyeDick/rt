@@ -46,85 +46,21 @@
 %#
 %# END BPS TAGGED BLOCK }}}
 % $r->content_type('application/json');
-<% JSON( \@suggestions ) |n %>
+<% JSON( $suggestions ) |n %>
 % $m->abort;
-<%ARGS>
-$return => ''
-$term => undef
-$delim => undef
-$max => 10
-$privileged => undef
-$exclude => ''
-$op => undef
-</%ARGS>
 <%INIT>
-# Only allow certain return fields
-$return = 'EmailAddress'
-    unless $return =~ /^(?:EmailAddress|Name|RealName)$/;
+use RT::Autocomplete::Users;
 
-$m->abort unless defined $return
-             and defined $term
-             and length $term;
+# Constructor wants uppercase first letter params.
+%ARGS = map { ucfirst ($_) => $ARGS{$_} } keys %ARGS;
 
-# Use our delimeter if we have one
-if ( defined $delim and length $delim ) {
-    if ( $delim eq ',' ) {
-        $delim = qr/,\s*/;
-    } else {
-        $delim = qr/\Q$delim\E/;
-    }
+my $auto = RT::Autocomplete::Users->new(
+           CurrentUser => $session{'CurrentUser'}, %ARGS);
 
-    # If the field handles multiple values, pop the last one off
-    $term = (split $delim, $term)[-1] if $term =~ $delim;
+my $suggestions = [];
+
+if ( $auto ){
+     my $users = $auto->FetchSuggestions;
+     $suggestions = $auto->FormatResults($users);
 }
-
-my $CurrentUser = $session{'CurrentUser'};
-
-# Require privileged users or overriding config
-$m->abort unless $CurrentUser->Privileged
-              or RT->Config->Get('AllowUserAutocompleteForUnprivileged');
-
-my %fields = %{ RT->Config->Get('UserAutocompleteFields')
-                || { EmailAddress => 1, Name => 1, RealName => 'LIKE' } };
-
-# If an operator is provided, check against only the returned field
-# using that operator
-%fields = ( $return => $op ) if $op;
-
-my $users = RT::Users->new( $CurrentUser );
-$users->RowsPerPage( $max );
-
-$users->LimitToPrivileged() if $privileged;
-
-while (my ($name, $op) = each %fields) {
-    $op = 'STARTSWITH'
-        unless $op =~ /^(?:LIKE|(?:START|END)SWITH|=|!=)$/i;
-
-    $users->Limit(
-        FIELD           => $name,
-        OPERATOR        => $op,
-        VALUE           => $term,
-        ENTRYAGGREGATOR => 'OR',
-        SUBCLAUSE       => 'autocomplete',
-    );
-}
-
-# Exclude users we don't want
-foreach (split /\s*,\s*/, $exclude) {
-    $users->Limit(FIELD => 'id', VALUE => $_, OPERATOR => '!=');
-}
-
-my @suggestions;
-
-while ( my $user = $users->Next ) {
-    next if $user->id == RT->SystemUser->id
-         or $user->id == RT->Nobody->id;
-
-    my $formatted = $m->scomp('/Elements/ShowUser', User => $user, NoEscape => 1);
-    $formatted =~ s/\n//g;
-    my $suggestion = { label => $formatted, value => $user->$return };
-    $m->callback( CallbackName => "ModifySuggestion", suggestion => $suggestion, user => $user );
-    push @suggestions, $suggestion;
-}
-
 </%INIT>
