@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 use RT;
-use RT::Test tests => 22;
+use RT::Test tests => 27;
 
 use_ok('RT::Autocomplete');
 
@@ -63,6 +63,21 @@ isa_ok($groups, 'RT::Groups');
 
 my $g = $groups->Next;
 is( $g->Name, $group_name, "Found $group_name group.");
+
+# Owner autocomplete tests
+use_ok( 'RT::Autocomplete::Owners' );
+
+my $ticket = RT::Test->create_ticket(
+    Subject => 'Test owner autocomplete',
+    Queue   => 'General',
+);
+
+my $auto_owner = RT::Autocomplete::Owners->new(
+		       CurrentUser => RT::CurrentUser->new($user),
+                       Term        => 'roo',
+                       Limit       => 'RT::Queue-' . $ticket->id,);
+
+isa_ok($auto_owner, 'RT::Autocomplete::Owners');
 
 sub test_user_autocomplete {
     my $user = shift;

@@ -71,7 +71,8 @@ use warnings;
 
 use base qw( RT::Base Class::Accessor::Fast );
 
-__PACKAGE__->mk_accessors( qw(Return Term Max Privileged Exclude Op OpProvided) );
+__PACKAGE__->mk_accessors( qw(Return Term Max Privileged Exclude Op OpProvided
+			      Limit ) );
 
 =head2 new
 
@@ -109,6 +110,10 @@ Values to exclude from the autocomplete results.
 =item * Op
 
 Operator for the search.
+
+=item * Limit
+
+Tickets or Queues to limit the search to (mostly for Owners).
 
 =back
 
@@ -152,8 +157,7 @@ sub _Init {
     $self->CurrentUser( $args{CurrentUser} );
 
     return ( 0, "No term provided." )
-      unless defined $args{Term}
-	and length $args{Term};
+      unless defined $args{Term};
 
     # Hook for child class validation.
     my ($return, $msg) = $self->ValidateParams(\%args);
@@ -184,6 +188,7 @@ sub _Init {
     $self->{'Privileged'} = $args{Privileged};
     $self->{'Exclude'} = $args{Exclude};
     $self->{'Op'} = $args{Op};
+    $self->{'Limit'} = $args{Limit};
 
     return ( 1, 'Object created.' );
 }

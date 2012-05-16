@@ -80,6 +80,9 @@ sub ValidateParams {
     return ( 0, 'Permission Denied' )
       unless $args_ref->{CurrentUser}->UserObj->Privileged;
 
+    return ( 0, "Empty term provided." )
+      unless length $args_ref->{Term};
+
     # Set to LIKE to allow fuzzier searching for group names
     $args_ref->{Op} = 'LIKE'
       unless $args_ref->{Op} =~ /^(?:LIKE|(?:START|END)SWITH|=|!=)$/i;

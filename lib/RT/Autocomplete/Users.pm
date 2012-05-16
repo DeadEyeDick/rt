@@ -83,16 +83,19 @@ sub ValidateParams {
       unless $args_ref->{CurrentUser}->UserObj->Privileged
 	or RT->Config->Get('AllowUserAutocompleteForUnprivileged');
 
+    return ( 0, "Empty term provided." )
+      unless length $args_ref->{Term};
+
+    # Only allow certain return fields for User entries
+    $args_ref->{Return} = 'EmailAddress'
+      unless $args_ref->{Return} =~ /^(?:EmailAddress|Name|RealName)$/;
+
     # Remember if the operator was provided to restrict the search
     # later.
     if( defined $args_ref->{Op}
 	and $args_ref->{Op} =~ /^(?:LIKE|(?:START|END)SWITH|=|!=)$/i ){
 	$self->{'OpProvided'} = $args_ref->{Op};
     }
-
-    # Only allow certain return fields for User entries
-    $args_ref->{Return} = 'EmailAddress'
-      unless $args_ref->{Return} =~ /^(?:EmailAddress|Name|RealName)$/;
 
     $args_ref->{Op} = 'STARTSWITH'
       unless $args_ref->{Op} =~ /^(?:LIKE|(?:START|END)SWITH|=|!=)$/i;
