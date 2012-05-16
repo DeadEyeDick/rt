@@ -71,7 +71,7 @@ use warnings;
 
 use base qw( RT::Base Class::Accessor::Fast );
 
-__PACKAGE__->mk_accessors( qw(Return Term Max Privileged Exclude Op) );
+__PACKAGE__->mk_accessors( qw(Return Term Max Privileged Exclude Op OpProvided) );
 
 =head2 new
 

@@ -83,6 +83,13 @@ sub ValidateParams {
       unless $args_ref->{CurrentUser}->UserObj->Privileged
 	or RT->Config->Get('AllowUserAutocompleteForUnprivileged');
 
+    # Remember if the operator was provided to restrict the search
+    # later.
+    if( defined $args_ref->{Op}
+	and $args_ref->{Op} =~ /^(?:LIKE|(?:START|END)SWITH|=|!=)$/i ){
+	$self->{'OpProvided'} = $args_ref->{Op};
+    }
+
     # Only allow certain return fields for User entries
     $args_ref->{Return} = 'EmailAddress'
       unless $args_ref->{Return} =~ /^(?:EmailAddress|Name|RealName)$/;
@@ -121,7 +128,7 @@ sub FetchSuggestions {
 
     # If an operator is provided, check against only the returned field
     # using that operator
-    %fields = ( $self->Return => $self->Op ) if $self->Op;
+    %fields = ( $self->Return => $self->Op ) if $self->OpProvided;
 
     my $users = RT::Users->new($self->CurrentUser);
     $users->RowsPerPage($self->Max);
