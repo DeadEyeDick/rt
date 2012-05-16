@@ -46,49 +46,21 @@
 %#
 %# END BPS TAGGED BLOCK }}}
 % $r->content_type('application/json');
-<% JSON( \@suggestions ) |n %>
+<% JSON( $suggestions ) |n %>
 % $m->abort;
 <%INIT>
-# Only autocomplete the last value
-my $term = (split /\n/, $ARGS{term} || '')[-1];
+use RT::Autocomplete::CustomFieldValues;
 
-my $CustomField;
-for my $k ( keys %ARGS ) {
-    next unless $k =~ /^Object-.*?-\d*-CustomField-(\d+)-Values?$/;
-    $CustomField = $1;
-    last;
-}
+# Constructor wants uppercase first letter params.
+%ARGS = map { ucfirst ($_) => $ARGS{$_} } keys %ARGS;
 
-$m->abort unless $CustomField;
-my $CustomFieldObj = RT::CustomField->new( $session{'CurrentUser'} );
-$CustomFieldObj->Load( $CustomField );
+my $auto = RT::Autocomplete::CustomFieldValues->new(
+           CurrentUser => $session{'CurrentUser'}, %ARGS);
 
-my $values = $CustomFieldObj->Values;
-$values->Limit(
-    FIELD           => 'Name',
-    OPERATOR        => 'LIKE',
-    VALUE           => $term,
-    SUBCLAUSE       => 'autocomplete',
-    CASESENSITIVE   => 0,
-);
-$values->Limit(
-    ENTRYAGGREGATOR => 'OR',
-    FIELD           => 'Description',
-    OPERATOR        => 'LIKE',
-    VALUE           => $term,
-    SUBCLAUSE       => 'autocomplete',
-    CASESENSITIVE   => 0,
-);
+my $suggestions = [];
 
-my @suggestions;
-
-while( my $value = $values->Next ) {
-    push @suggestions,
-      {
-        value => $value->Name,
-        label => $value->Description
-        ? $value->Name . ' (' . $value->Description . ')'
-        : $value->Name,
-      };
-}
+if ( $auto ){
+     my $values = $auto->FetchSuggestions;
+     $suggestions = $auto->FormatResults($values);
+ }
 </%INIT>

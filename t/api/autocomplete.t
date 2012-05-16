@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 use RT;
-use RT::Test tests => 27;
+use RT::Test tests => 29;
 
 use_ok('RT::Autocomplete');
 
@@ -78,6 +78,16 @@ my $auto_owner = RT::Autocomplete::Owners->new(
                        Limit       => 'RT::Queue-' . $ticket->id,);
 
 isa_ok($auto_owner, 'RT::Autocomplete::Owners');
+
+# CustomFieldValues autocomplete tests
+use_ok( 'RT::Autocomplete::CustomFieldValues' );
+
+my $auto_cfv = RT::Autocomplete::CustomFieldValues->new(
+		       CurrentUser => RT::CurrentUser->new($user),
+                       Term        => 'foo',
+		       'Object-RT::Ticket-1-CustomField-1-Value' => 1,);
+
+isa_ok($auto_cfv, 'RT::Autocomplete::CustomFieldValues');
 
 sub test_user_autocomplete {
     my $user = shift;

@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use RT::Test tests => 27;
+use RT::Test tests => 55;
 use JSON qw(from_json);
 
 my ($url, $m) = RT::Test->started_ok;
@@ -64,6 +64,81 @@ $m->get_ok( '/Helpers/Autocomplete/Groups?return=Name&term=uto',
 	    "request for $group_name" );
 
 $m->content_contains($group_name, "Found $group_name");
+
+# CF Values tests
+$m->get_ok( '/Helpers/Autocomplete/CustomFieldValues',
+	    'CFV request with no params' );
+
+$m->content_is("[]\n", 'empty JSON no params');
+
+my $cf_name = 'test enter one value with autocompletion';
+my $cfid;
+$m->get_ok(RT::Test::Web->rt_base_url);
+diag "Create a CF";
+{
+    $m->follow_link_ok( {id => 'tools-config-custom-fields-create'} );
+    $m->submit_form(
+        form_name => "ModifyCustomField",
+        fields => {
+            Name          => $cf_name,
+            TypeComposite => 'Autocomplete-1',
+            LookupType    => 'RT::Queue-RT::Ticket',
+        },
+    );
+    $m->content_contains('Object created', 'created CF sucessfully' );
+    $cfid = $m->form_name('ModifyCustomField')->value('id');
+    ok $cfid, "found id of the CF in the form, it's #$cfid";
+}
+
+diag "add 'qwe', 'ASD', '0' and 'foo bar' as values to the CF";
+{
+    foreach my $value(qw(qwe ASD 0), 'foo bar') {
+        $m->submit_form(
+            form_name => "ModifyCustomField",
+            fields => {
+                "CustomField-". $cfid ."-Value-new-Name" => $value,
+            },
+            button => 'Update',
+        );
+        $m->content_contains('Object created', 'added a value to the CF' ); # or diag $m->content;
+        my $v = $value;
+        $v =~ s/^\s+$//;
+        $v =~ s/\s+$//;
+        $m->content_contains("value=\"$v\"", 'the added value is right' );
+    }
+}
+
+diag "apply the CF to General queue";
+{
+    $m->follow_link( id => 'tools-config-queues');
+    $m->follow_link( text => 'General' );
+    $m->title_is(q/Configuration for queue General/, 'admin-queue: general');
+    $m->follow_link( id => 'page-ticket-custom-fields');
+    $m->title_is(q/Custom Fields for queue General/, 'admin-queue: general cfid');
+
+    $m->form_name('EditCustomFields');
+    $m->tick( "AddCustomField" => $cfid );
+    $m->click('UpdateCFs');
+
+    $m->content_contains('Object created', 'TCF added to the queue' );
+}
+
+my $ticket = RT::Test->create_ticket(
+    Subject => 'Test CF value autocomplete',
+    Queue   => 'General',
+);
+
+foreach my $term ( qw(qw AS 0), 'foo bar') {
+
+    my $url = 'CustomFieldValues?Object-RT::Ticket-'
+      . $ticket->id . '-CustomField-' . $cfid
+	. '-Value&term=' . $term;
+
+    $m->get_ok( "/Helpers/Autocomplete/$url",
+		"request for values on CF $cfid" );
+
+    $m->content_contains($term, "Found $term");
+}
 
 sub autocomplete {
     my $term = shift;

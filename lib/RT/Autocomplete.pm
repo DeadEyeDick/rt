@@ -72,7 +72,7 @@ use warnings;
 use base qw( RT::Base Class::Accessor::Fast );
 
 __PACKAGE__->mk_accessors( qw(Return Term Max Privileged Exclude Op OpProvided
-			      Limit ) );
+			      Limit CustomField) );
 
 =head2 new
 
